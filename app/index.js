@@ -9,6 +9,10 @@ app.get('/', function (req, res) {
 });
 
 // process.env.PORT ensures that Express sets the port Heroku is expecting traffic on
-app.listen(PORT, function () {
+const server = app.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`);
 });
+
+module.exports.app = app;
+
+module.exports.server = server;

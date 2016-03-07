@@ -10,7 +10,7 @@ dependencies:
 test:
   override:
     - "docker run -d -p 3000:3000 registry.heroku.com/ftlabs-docker-node-alpine/web; sleep 10"
-    - "(cd app && APPLICATION_ENDPOINT='http://localhost:3000' npm test)"
+    - "(cd app && npm i --only=dev && APPLICATION_ENDPOINT='http://localhost:3000' npm test)"
 deployment:
   production:
     branch: master

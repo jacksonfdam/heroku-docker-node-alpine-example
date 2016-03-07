@@ -1,5 +1,7 @@
 ## Heroku Docker Example
 
+Demonstration of application working in Heroku: https://ftlabs-docker-node-alpine.herokuapp.com/
+
 This project uses [Alpine-Node](https://github.com/mhart/alpine-node) as the base image instead of Heroku's [Cedar base image](https://github.com/heroku/stack-images).
 
 ### Why use [Alpine Linux](http://www.alpinelinux.org/) / Alpine-Node as the base image?

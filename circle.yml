@@ -9,8 +9,11 @@ dependencies:
     - "docker build -t registry.heroku.com/ftlabs-docker-node-alpine/web ."
 test:
   override:
+    - "docker run -d -p 3000:3000 --name test registry.heroku.com/ftlabs-docker-node-alpine/web"
+    - "docker exec test npm i"
+    - "docker exec test npm run test:unit"
     - "docker run -d -p 3000:3000 registry.heroku.com/ftlabs-docker-node-alpine/web; sleep 10"
-    - "(cd app && npm i --only=dev && APPLICATION_ENDPOINT='http://localhost:3000' npm test)"
+    - "(cd app && npm i --only=dev && APPLICATION_ENDPOINT='http://localhost:3000' npm test:integration)"
 deployment:
   production:
     branch: master

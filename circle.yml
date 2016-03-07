@@ -1,0 +1,19 @@
+machine:
+  services:
+    - "docker"
+dependencies:
+  override:
+    - "docker info"
+    - "docker build -t registry.heroku.com/ftlabs-docker-node-alpine/web ."
+test:
+  override:
+    - "docker run -d -p 3000:3000 registry.heroku.com/ftlabs-docker-node-alpine/web; sleep 10"
+    - "(cd app && APPLICATION_ENDPOINT='http://localhost:3000' npm test)"
+deployment:
+  production:
+    branch: master
+    commands:
+      - 'echo "machine api.heroku.com login jake.champion@ft.com password ${HEROKU_AUTH_TOKEN}" >> ${HOME}/.netrc;'
+      - 'chmod 0600 /home/ubuntu/.netrc;'
+      - 'docker login --email=_ --username=_ --password=$(heroku auth:token) registry.heroku.com'
+      - 'docker push registry.heroku.com/ftlabs-docker-node-alpine/web'

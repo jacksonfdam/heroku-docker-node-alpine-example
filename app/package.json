@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An express server hello world application to demo docker on heroku",
   "main": "index.js",
+  "repository": {
+      "type" : "git",
+      "url" : "https://github.com/Financial-Times/heroku-docker-node-alpine-example"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"

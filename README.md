@@ -30,7 +30,8 @@ If running Windows or OS X it is recommended to install the [Docker Toolbox](htt
 If running Linux, install using the package manager of your choice.
 
 #### Steps to follow
-- Clone the repository -- `git clone`
+- Clone the repository -- `git clone git@github.com:Financial-Times/heroku-docker-node-alpine-example.git`
+- Change into the project's directory -- `cd heroku-docker-node-alpine-example`
 - Create a local container using Docker Compose to mount the project's app folder from your machine to the container -- `docker-compose up`
 
 ### Deployment

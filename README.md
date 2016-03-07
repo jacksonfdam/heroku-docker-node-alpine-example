@@ -36,6 +36,10 @@ If running Linux, install using the package manager of your choice.
 - Change into the project's directory -- `cd heroku-docker-node-alpine-example`
 - Create a local container using Docker Compose to mount the project's app folder from your machine to the container -- `docker-compose up`
 
+#### Testing
+
+Every form of testing except integration testing will require running non-production code within the container. To do this we need to install the development dependencies within the container using `docker-compose run web npm i`. After this point we can now run the testing tasks, however they are set-up. This project uses NPM Run Scripts for it's task management. You can run the tests using `npm test`.
+
 ### Deployment
 
 #### Requirements
@@ -52,4 +56,3 @@ If running Linux, install using the package manager of your choice.
 - Sign into the Docker CLI, pointing at Heroku's registry -- ` docker login --email=_ --username=_ --password=$(heroku auth:token) registry.heroku.com`
 - Build and tag the Docker image, the tag of the image corresponds to "${Heroku's registry}/${Application name}/{$Heroku process type}" -- `docker build -t registry.heroku.com/ftlabs-docker-node-alpine/web .`
 - Push the image to Heroku's Docker registry to deploy the application - `docker push registry.heroku.com/ftlabs-docker-node-alpine/web`
-

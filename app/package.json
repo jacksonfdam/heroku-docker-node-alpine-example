@@ -1,0 +1,15 @@
+{
+  "name": "heroki-docker-node-alpine-example",
+  "version": "1.0.0",
+  "description": "An express server hello world application to demo docker on heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "FT Labs",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

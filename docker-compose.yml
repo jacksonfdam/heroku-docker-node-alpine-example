@@ -1,0 +1,7 @@
+# This is only used for development purposes. You can not use Docker Compose on Heroku.
+web:
+  build: .
+  volumes:
+    - "./app:/src/app"
+  ports:
+    - "3000:3000"

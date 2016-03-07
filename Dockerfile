@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:latest
+FROM mhart/alpine-node:5.7.1
 
 # The working directory must be set using WORKDIR
 WORKDIR app

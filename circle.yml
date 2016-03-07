@@ -2,17 +2,28 @@ machine:
   services:
     - "docker"
   node:
+    # This is required to run our integration tests, it isn't required for our actual application.
+    # If your integration tests are in another language such as Ruby using Capybara then you should change this to install Ruby instead of Node.
     version: 5.7.1
 dependencies:
   override:
-    - "docker info"
+    # The name of the application is a combination of Heroku's registry, your heroku application's name and the name of the process type.
     - "docker build -t registry.heroku.com/ftlabs-docker-node-alpine/web ."
 test:
   override:
     - "docker run -d -p 3000:3000 --name test registry.heroku.com/ftlabs-docker-node-alpine/web"
+    
+    # `docker exec test (cd app && npm i && npm run test:unit)` would be the preferred command
+    # but Circle CI uses the LXC driver which does not support `docker exec` as of yet. 
     - sudo lxc-attach -n $(docker inspect --format '{{.Id}}' test) -- ash -c 'cd app && npm i && npm run test:unit'
+    
+    # The `|| true` is because of this issue -- https://discuss.circleci.com/t/docker-error-removing-intermediate-container/70
     - docker stop test && docker rm test || true
+    
+    # The `sleep 10` is to let the application inside the container have a chance to start-up fully. 
     - "docker run -d -p 3000:3000 registry.heroku.com/ftlabs-docker-node-alpine/web; sleep 10"
+    
+    # This is wrapped in parentheses as we do not want to be inside the app folder after these commands execute 
     - "(cd app && npm i --only=dev && APPLICATION_ENDPOINT='http://localhost:3000' npm run test:integration)"
 deployment:
   production:

@@ -11,7 +11,7 @@ test:
   override:
     - "docker run -d -p 3000:3000 --name test registry.heroku.com/ftlabs-docker-node-alpine/web"
     - sudo lxc-attach -n $(docker inspect --format '{{.Id}}' test) -- ash -c 'cd app && npm i && npm run test:unit'
-    - docker stop test && docker rm test
+    - docker stop test && docker rm test || true
     - "docker run -d -p 3000:3000 registry.heroku.com/ftlabs-docker-node-alpine/web; sleep 10"
     - "(cd app && npm i --only=dev && APPLICATION_ENDPOINT='http://localhost:3000' npm test:integration)"
 deployment:

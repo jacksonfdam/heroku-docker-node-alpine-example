@@ -11,7 +11,7 @@ ADD app/package.json ./
 # If don't you need npm, use a base tag
 RUN npm install --production
 
-# Remove the cache folder that NPM creates
+# Remove the cache that NPM creates
 RUN npm cache clean
 
 # Add application code to

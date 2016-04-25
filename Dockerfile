@@ -4,18 +4,19 @@ FROM mhart/alpine-node:5.7.1
 WORKDIR app
 ENV HOME="/app"
 
-# If you have native dependencies, you'll need extra tools. Also remove any cached files from the installs
-# RUN apk add --no-cache make gcc g++ python
+# Set the application to be in production mode by default
+ENV NODE_ENV production
+
+# Install additional dependencies required to build modules
+# You need these to build native dependencies (mostly node-sass)
+# RUN apk add --no-cache --update g++ gcc git make python && rm -rf /var/cache/apk/*
 
 ADD app/package.json ./
 
-# If don't you need npm, use a base tag
-RUN npm install --production
+# Install dependencies and remove the cache that NPM creates
+RUN npm install --production && npm cache clean
 
-# Remove the cache that NPM creates
-RUN npm cache clean
-
-# Add application code to
+# Add application code
 ADD app/ .
 
 # Heroku ignores this command and will use their designated port set as an environment variable

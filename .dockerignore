@@ -1,1 +1,6 @@
 app/node_modules/
+.gitignore
+circle.yml
+docker-compose.yml
+Dockerfile
+README.md

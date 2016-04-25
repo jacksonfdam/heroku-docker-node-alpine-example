@@ -1,6 +1,10 @@
 machine:
   services:
     - "docker"
+  node:
+    # This is required to run our integration tests, it isn't required for our actual application.
+    # If your integration tests are in another language such as Ruby using Capybara then you should change this to install Ruby instead of Node.
+    version: 5.7.1
 dependencies:
   override:
     # The name of the application is a combination of Heroku's registry, your heroku application's name and the name of the process type.
